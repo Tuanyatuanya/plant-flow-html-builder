@@ -1,0 +1,243 @@
+{
+  "case_id": "test-02-three-lane-hall",
+  "title": "TEST 02 · THREE-LANE HALL",
+  "difficulty": "medium",
+  "zones": [
+    {
+      "id": "side_dock",
+      "label": "SIDE-LOAD DOCK",
+      "bbox": [
+        80,
+        90,
+        300,
+        90
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "back_dock",
+      "label": "BACK-LOAD DOCK",
+      "bbox": [
+        900,
+        90,
+        260,
+        90
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "staking_left",
+      "label": "STAKING AREA",
+      "bbox": [
+        100,
+        230,
+        500,
+        90
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "staking_right",
+      "label": "STAKING AREA",
+      "bbox": [
+        650,
+        230,
+        500,
+        90
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "rack",
+      "label": "PALLET RACK AREA",
+      "bbox": [
+        100,
+        370,
+        500,
+        200
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "kitting",
+      "label": "E3 & E4 DP KITTING AREA",
+      "bbox": [
+        650,
+        370,
+        500,
+        200
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "upper_assembly",
+      "label": "NCAR UPPER ASSEMBLY",
+      "bbox": [
+        100,
+        650,
+        280,
+        130
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "lower_assembly",
+      "label": "NCAR LOWER ASSEMBLY",
+      "bbox": [
+        410,
+        650,
+        280,
+        130
+      ],
+      "color": "#f6dced"
+    },
+    {
+      "id": "dp_assembly",
+      "label": "E3 & E4 DP ASSEMBLY",
+      "bbox": [
+        720,
+        650,
+        430,
+        130
+      ],
+      "color": "#d8f1f2"
+    }
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "PORSCHE E3/E4",
+      "color": "#087fce",
+      "source": "back_dock",
+      "destinations": [
+        "dp_assembly"
+      ],
+      "speed": 60,
+      "routes": [
+        {
+          "id": "blue-dp",
+          "destination": "dp_assembly",
+          "waypoints": [
+            [
+              1030,
+              180
+            ],
+            [
+              1190,
+              180
+            ],
+            [
+              1190,
+              620
+            ],
+            [
+              935,
+              620
+            ],
+            [
+              935,
+              650
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green",
+      "label": "NCAR UPPER",
+      "color": "#10a56a",
+      "source": "side_dock",
+      "destinations": [
+        "upper_assembly"
+      ],
+      "speed": 42,
+      "routes": [
+        {
+          "id": "green-upper",
+          "destination": "upper_assembly",
+          "waypoints": [
+            [
+              230,
+              180
+            ],
+            [
+              65,
+              180
+            ],
+            [
+              65,
+              620
+            ],
+            [
+              240,
+              620
+            ],
+            [
+              240,
+              650
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "purple",
+      "label": "NCAR LOWER",
+      "color": "#d83faf",
+      "source": "side_dock",
+      "destinations": [
+        "lower_assembly"
+      ],
+      "speed": 72,
+      "routes": [
+        {
+          "id": "purple-lower",
+          "destination": "lower_assembly",
+          "waypoints": [
+            [
+              330,
+              180
+            ],
+            [
+              50,
+              180
+            ],
+            [
+              50,
+              805
+            ],
+            [
+              550,
+              805
+            ],
+            [
+              550,
+              780
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "evidence": [
+    {
+      "field": "flows.blue.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.green.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.purple.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    }
+  ]
+}

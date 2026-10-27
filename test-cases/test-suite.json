@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "case_id": "test-01-linear-line",
+      "title": "TEST 01 \u00b7 LINEAR ASSEMBLY",
+      "difficulty": "easy",
+      "image": "test-01-linear-line.png",
+      "svg": "test-01-linear-line.svg",
+      "ground_truth": "test-01-linear-line.ground-truth.json"
+    },
+    {
+      "case_id": "test-02-three-lane-hall",
+      "title": "TEST 02 \u00b7 THREE-LANE HALL",
+      "difficulty": "medium",
+      "image": "test-02-three-lane-hall.png",
+      "svg": "test-02-three-lane-hall.svg",
+      "ground_truth": "test-02-three-lane-hall.ground-truth.json"
+    },
+    {
+      "case_id": "test-03-branch-and-merge",
+      "title": "TEST 03 \u00b7 BRANCH & MERGE",
+      "difficulty": "hard",
+      "image": "test-03-branch-and-merge.png",
+      "svg": "test-03-branch-and-merge.svg",
+      "ground_truth": "test-03-branch-and-merge.ground-truth.json"
+    },
+    {
+      "case_id": "test-04-asymmetric-retrofit",
+      "title": "TEST 04 \u00b7 ASYMMETRIC RETROFIT",
+      "difficulty": "expert",
+      "image": "test-04-asymmetric-retrofit.png",
+      "svg": "test-04-asymmetric-retrofit.svg",
+      "ground_truth": "test-04-asymmetric-retrofit.ground-truth.json"
+    },
+    {
+      "case_id": "test-05-mixed-mode-plant",
+      "title": "TEST 05 \u00b7 MIXED-MODE PLANT",
+      "difficulty": "hard",
+      "image": "test-05-mixed-mode-plant.png",
+      "svg": "test-05-mixed-mode-plant.svg",
+      "ground_truth": "test-05-mixed-mode-plant.ground-truth.json"
+    }
+  ]
+}

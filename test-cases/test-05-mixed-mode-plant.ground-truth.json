@@ -1,0 +1,290 @@
+{
+  "case_id": "test-05-mixed-mode-plant",
+  "title": "TEST 05 · MIXED-MODE PLANT",
+  "difficulty": "hard",
+  "zones": [
+    {
+      "id": "receiving",
+      "label": "RECEIVING DOCK",
+      "bbox": [
+        80,
+        90,
+        240,
+        120
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "raw_storage",
+      "label": "RAW MATERIAL STORAGE",
+      "bbox": [
+        80,
+        300,
+        300,
+        260
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "machining",
+      "label": "MACHINING",
+      "bbox": [
+        470,
+        100,
+        260,
+        180
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "subassembly",
+      "label": "SUBASSEMBLY",
+      "bbox": [
+        800,
+        100,
+        300,
+        180
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "main_assembly",
+      "label": "MAIN ASSEMBLY",
+      "bbox": [
+        470,
+        410,
+        500,
+        220
+      ],
+      "color": "#d8f1f2"
+    },
+    {
+      "id": "quality",
+      "label": "QUALITY GATE",
+      "bbox": [
+        1030,
+        430,
+        190,
+        120
+      ],
+      "color": "#f6dced"
+    },
+    {
+      "id": "return_wash",
+      "label": "RETURNABLE WASH",
+      "bbox": [
+        250,
+        690,
+        260,
+        100
+      ],
+      "color": "#e8ecee"
+    },
+    {
+      "id": "finished_goods",
+      "label": "FINISHED GOODS",
+      "bbox": [
+        850,
+        700,
+        300,
+        100
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "shipping",
+      "label": "SHIPPING",
+      "bbox": [
+        1190,
+        680,
+        100,
+        120
+      ],
+      "color": "#d9ebfb"
+    }
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "PRODUCT A",
+      "color": "#087fce",
+      "source": "receiving",
+      "destinations": [
+        "main_assembly"
+      ],
+      "speed": 56,
+      "routes": [
+        {
+          "id": "blue-main",
+          "destination": "main_assembly",
+          "waypoints": [
+            [
+              320,
+              150
+            ],
+            [
+              420,
+              150
+            ],
+            [
+              420,
+              380
+            ],
+            [
+              720,
+              380
+            ],
+            [
+              720,
+              410
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green",
+      "label": "PRODUCT B",
+      "color": "#10a56a",
+      "source": "raw_storage",
+      "destinations": [
+        "quality"
+      ],
+      "speed": 43,
+      "routes": [
+        {
+          "id": "green-quality",
+          "destination": "quality",
+          "waypoints": [
+            [
+              380,
+              430
+            ],
+            [
+              440,
+              430
+            ],
+            [
+              440,
+              650
+            ],
+            [
+              1000,
+              650
+            ],
+            [
+              1000,
+              490
+            ],
+            [
+              1030,
+              490
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "purple",
+      "label": "PACKAGING RETURN",
+      "color": "#d83faf",
+      "source": "shipping",
+      "destinations": [
+        "return_wash"
+      ],
+      "speed": 66,
+      "routes": [
+        {
+          "id": "purple-return",
+          "destination": "return_wash",
+          "waypoints": [
+            [
+              1190,
+              750
+            ],
+            [
+              1160,
+              750
+            ],
+            [
+              1160,
+              830
+            ],
+            [
+              200,
+              830
+            ],
+            [
+              200,
+              740
+            ],
+            [
+              250,
+              740
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orange",
+      "label": "FINISHED GOODS",
+      "color": "#ee7a22",
+      "source": "main_assembly",
+      "destinations": [
+        "finished_goods"
+      ],
+      "speed": 48,
+      "routes": [
+        {
+          "id": "orange-fg",
+          "destination": "finished_goods",
+          "waypoints": [
+            [
+              970,
+              560
+            ],
+            [
+              1000,
+              560
+            ],
+            [
+              1000,
+              670
+            ],
+            [
+              1000,
+              700
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "evidence": [
+    {
+      "field": "flows.blue.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.green.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.purple.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.orange.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    }
+  ]
+}

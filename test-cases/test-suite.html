@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plant Flow Skill Test Suite</title>
+<style>
+:root{--navy:#10212c;--panel:#17303e;--line:#375767;--paper:#f5f7f6;--yellow:#ffd400;--ink:#edf4f6;--muted:#a7bbc5}
+*{box-sizing:border-box}body{margin:0;background:var(--navy);color:var(--ink);font:14px/1.5 Arial,sans-serif}header{padding:28px clamp(18px,4vw,60px);border-bottom:1px solid var(--line)}h1{margin:0;border-left:5px solid var(--yellow);padding-left:15px;font-size:clamp(24px,4vw,42px);letter-spacing:.02em}header p{max-width:850px;margin:12px 0 0;color:var(--muted)}code{color:#fff;background:#07151d;padding:2px 5px;border-radius:3px}.protocol{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-bottom:1px solid var(--line)}.protocol div{padding:18px clamp(18px,4vw,60px);background:#112631}.protocol b{display:block;color:var(--yellow);margin-bottom:4px}.protocol span{color:var(--muted)}main{padding:26px clamp(14px,3vw,42px) 60px;display:grid;gap:28px}.case{background:var(--panel);border:1px solid var(--line);border-radius:7px;overflow:hidden}.case-head{display:flex;align-items:center;gap:14px;padding:14px 16px}.case h2{font-size:16px;margin:0}.badge{margin-left:auto;color:var(--yellow);font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}.case img{display:block;width:100%;height:auto;background:#fff}.links{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px}.links a{color:#dce9ee;text-decoration:none;border:1px solid #537183;padding:7px 10px;border-radius:3px;font-size:12px}.links a:hover{border-color:var(--yellow);color:#fff}@media(max-width:700px){.protocol{grid-template-columns:1fr}.protocol div{padding:12px 18px}}
+</style>
+</head>
+<body>
+<header><h1>Plant Flow Skill Test Suite</h1><p>Use each PNG as the only layout input. Keep its ground-truth JSON hidden until the HTML has been generated, then score the result with the Skill validator.</p></header>
+<section class="protocol"><div><b>1 · Generate</b><span>Attach one PNG and invoke <code>$plant-flow-html-builder</code>.</span></div><div><b>2 · Validate</b><span>Run the HTML validator with the matching ground-truth JSON.</span></div><div><b>3 · Review</b><span>Manually inspect line separation, dot direction, clarity, and responsive layout.</span></div></section>
+<main>
+  <article class="case"><div class="case-head"><h2>Test 01 · Linear Assembly</h2><span class="badge">Easy</span></div><img src="test-01-linear-line.png" alt="Linear assembly plant-flow test"><div class="links"><a href="test-01-linear-line.png">PNG input</a><a href="test-01-linear-line.svg">SVG source</a><a href="test-01-linear-line.ground-truth.json">Ground truth</a></div></article>
+  <article class="case"><div class="case-head"><h2>Test 02 · Three-Lane Hall</h2><span class="badge">Medium</span></div><img src="test-02-three-lane-hall.png" alt="Three-lane hall plant-flow test"><div class="links"><a href="test-02-three-lane-hall.png">PNG input</a><a href="test-02-three-lane-hall.svg">SVG source</a><a href="test-02-three-lane-hall.ground-truth.json">Ground truth</a></div></article>
+  <article class="case"><div class="case-head"><h2>Test 03 · Branch &amp; Merge</h2><span class="badge">Hard</span></div><img src="test-03-branch-and-merge.png" alt="Branch and merge plant-flow test"><div class="links"><a href="test-03-branch-and-merge.png">PNG input</a><a href="test-03-branch-and-merge.svg">SVG source</a><a href="test-03-branch-and-merge.ground-truth.json">Ground truth</a></div></article>
+  <article class="case"><div class="case-head"><h2>Test 04 · Asymmetric Retrofit</h2><span class="badge">Expert</span></div><img src="test-04-asymmetric-retrofit.png" alt="Asymmetric retrofit plant-flow test"><div class="links"><a href="test-04-asymmetric-retrofit.png">PNG input</a><a href="test-04-asymmetric-retrofit.svg">SVG source</a><a href="test-04-asymmetric-retrofit.ground-truth.json">Ground truth</a></div></article>
+  <article class="case"><div class="case-head"><h2>Test 05 · Mixed-Mode Plant</h2><span class="badge">Hard</span></div><img src="test-05-mixed-mode-plant.png" alt="Mixed-mode plant-flow test"><div class="links"><a href="test-05-mixed-mode-plant.png">PNG input</a><a href="test-05-mixed-mode-plant.svg">SVG source</a><a href="test-05-mixed-mode-plant.ground-truth.json">Ground truth</a></div></article>
+</main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "case_id": "test-05-mixed-mode-plant",
+  "title": "TEST 05 · MIXED-MODE PLANT",
+  "canvas": {"width": 1600, "height": 900},
+  "zones": [
+    {"id": "receiving-dock", "label": "RECEIVING DOCK", "bbox": [80, 90, 240, 120], "color": "#d4e6f7"},
+    {"id": "machining", "label": "MACHINING", "bbox": [470, 100, 260, 180], "color": "#dcf2e6"},
+    {"id": "subassembly", "label": "SUBASSEMBLY", "bbox": [800, 100, 300, 180], "color": "#dcf2e6"},
+    {"id": "raw-material-storage", "label": "RAW MATERIAL STORAGE", "bbox": [80, 300, 300, 260], "color": "#fff0bd"},
+    {"id": "main-assembly", "label": "MAIN ASSEMBLY", "bbox": [470, 410, 500, 220], "color": "#d9f1f3"},
+    {"id": "quality-gate", "label": "QUALITY GATE", "bbox": [1030, 430, 190, 120], "color": "#f3d8eb"},
+    {"id": "returnable-wash", "label": "RETURNABLE WASH", "bbox": [250, 690, 260, 100], "color": "#e8ecee"},
+    {"id": "finished-goods", "label": "FINISHED GOODS", "bbox": [850, 700, 300, 100], "color": "#fff0bd"},
+    {"id": "shipping", "label": "SHIPPING", "bbox": [1190, 680, 100, 120], "color": "#d4e6f7"}
+  ],
+  "flows": [
+    {"id": "product-a", "label": "PRODUCT A", "color": "#0783cc", "source": "receiving-dock", "destinations": ["main-assembly"], "speed": 70, "routes": [{"id": "product-a-main", "destination": "main-assembly", "waypoints": [[320,150],[420,150],[420,380],[720,380],[720,410]]}]},
+    {"id": "product-b", "label": "PRODUCT B", "color": "#10a56f", "source": "raw-material-storage", "destinations": ["quality-gate"], "speed": 62, "routes": [{"id": "product-b-main", "destination": "quality-gate", "waypoints": [[380,430],[440,430],[440,650],[1000,650],[1000,490],[1030,490]]}]},
+    {"id": "packaging-return", "label": "PACKAGING RETURN", "color": "#df39aa", "source": "shipping", "destinations": ["returnable-wash"], "speed": 82, "routes": [{"id": "packaging-return-main", "destination": "returnable-wash", "waypoints": [[1190,750],[1160,750],[1160,830],[200,830],[200,740],[250,740]]}]},
+    {"id": "finished-goods-flow", "label": "FINISHED GOODS", "color": "#f47a16", "source": "main-assembly", "destinations": ["finished-goods"], "speed": 48, "routes": [{"id": "finished-goods-main", "destination": "finished-goods", "waypoints": [[970,560],[1000,560],[1000,700]]}]}
+  ],
+  "evidence": [
+    {"field": "flows.product-a.direction", "basis": "arrowhead at MAIN ASSEMBLY", "confidence": 1.0},
+    {"field": "flows.product-b.direction", "basis": "arrowhead at QUALITY GATE", "confidence": 1.0},
+    {"field": "flows.packaging-return.direction", "basis": "arrowhead at RETURNABLE WASH", "confidence": 1.0},
+    {"field": "flows.finished-goods-flow.direction", "basis": "arrowhead at FINISHED GOODS", "confidence": 1.0}
+  ]
+}

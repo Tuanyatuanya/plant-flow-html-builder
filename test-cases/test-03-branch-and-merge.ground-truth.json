@@ -1,0 +1,240 @@
+{
+  "case_id": "test-03-branch-and-merge",
+  "title": "TEST 03 · BRANCH & MERGE",
+  "difficulty": "hard",
+  "zones": [
+    {
+      "id": "receiving_a",
+      "label": "RECEIVING A",
+      "bbox": [
+        80,
+        110,
+        220,
+        140
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "receiving_b",
+      "label": "RECEIVING B",
+      "bbox": [
+        80,
+        310,
+        220,
+        140
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "supermarket",
+      "label": "CENTRAL SUPERMARKET",
+      "bbox": [
+        460,
+        170,
+        300,
+        220
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "line_a",
+      "label": "ASSEMBLY LINE A",
+      "bbox": [
+        950,
+        100,
+        250,
+        180
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "line_b",
+      "label": "ASSEMBLY LINE B",
+      "bbox": [
+        950,
+        350,
+        250,
+        180
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "quality",
+      "label": "FINAL QUALITY",
+      "bbox": [
+        600,
+        600,
+        260,
+        120
+      ],
+      "color": "#f6dced"
+    },
+    {
+      "id": "outbound",
+      "label": "OUTBOUND",
+      "bbox": [
+        1040,
+        650,
+        180,
+        100
+      ],
+      "color": "#d8f1f2"
+    }
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "BODY PARTS",
+      "color": "#087fce",
+      "source": "receiving_a",
+      "destinations": [
+        "line_a",
+        "line_b"
+      ],
+      "speed": 58,
+      "routes": [
+        {
+          "id": "blue-line-a",
+          "destination": "line_a",
+          "waypoints": [
+            [
+              190,
+              110
+            ],
+            [
+              190,
+              70
+            ],
+            [
+              1075,
+              70
+            ],
+            [
+              1075,
+              100
+            ]
+          ]
+        },
+        {
+          "id": "blue-line-b",
+          "destination": "line_b",
+          "waypoints": [
+            [
+              300,
+              180
+            ],
+            [
+              410,
+              180
+            ],
+            [
+              410,
+              550
+            ],
+            [
+              1075,
+              550
+            ],
+            [
+              1075,
+              530
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green",
+      "label": "PURCHASED PARTS",
+      "color": "#10a56a",
+      "source": "receiving_b",
+      "destinations": [
+        "quality"
+      ],
+      "speed": 44,
+      "routes": [
+        {
+          "id": "green-quality",
+          "destination": "quality",
+          "waypoints": [
+            [
+              300,
+              380
+            ],
+            [
+              410,
+              380
+            ],
+            [
+              410,
+              660
+            ],
+            [
+              600,
+              660
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "purple",
+      "label": "FINISHED GOODS",
+      "color": "#d83faf",
+      "source": "supermarket",
+      "destinations": [
+        "outbound"
+      ],
+      "speed": 68,
+      "routes": [
+        {
+          "id": "purple-outbound",
+          "destination": "outbound",
+          "waypoints": [
+            [
+              610,
+              390
+            ],
+            [
+              610,
+              570
+            ],
+            [
+              970,
+              570
+            ],
+            [
+              970,
+              700
+            ],
+            [
+              1040,
+              700
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "evidence": [
+    {
+      "field": "flows.blue.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.green.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.purple.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    }
+  ]
+}

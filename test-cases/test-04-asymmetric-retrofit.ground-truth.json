@@ -1,0 +1,305 @@
+{
+  "case_id": "test-04-asymmetric-retrofit",
+  "title": "TEST 04 · ASYMMETRIC RETROFIT",
+  "difficulty": "expert",
+  "zones": [
+    {
+      "id": "inbound",
+      "label": "INBOUND DOCK",
+      "bbox": [
+        90,
+        80,
+        250,
+        100
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "high_bay",
+      "label": "HIGH-BAY STORAGE",
+      "bbox": [
+        90,
+        240,
+        320,
+        260
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "cell_a",
+      "label": "PROCESS CELL A",
+      "bbox": [
+        500,
+        100,
+        220,
+        160
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "cell_b",
+      "label": "PROCESS CELL B",
+      "bbox": [
+        770,
+        100,
+        220,
+        160
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "shared_tools",
+      "label": "SHARED TOOLING",
+      "bbox": [
+        500,
+        340,
+        180,
+        160
+      ],
+      "color": "#e8ecee"
+    },
+    {
+      "id": "inspection",
+      "label": "IN-LINE INSPECTION",
+      "bbox": [
+        760,
+        350,
+        230,
+        110
+      ],
+      "color": "#f6dced"
+    },
+    {
+      "id": "battery",
+      "label": "BATTERY MODULE",
+      "bbox": [
+        1080,
+        120,
+        180,
+        250
+      ],
+      "color": "#d8f1f2"
+    },
+    {
+      "id": "maintenance",
+      "label": "MAINTENANCE",
+      "bbox": [
+        230,
+        620,
+        300,
+        120
+      ],
+      "color": "#e8ecee"
+    },
+    {
+      "id": "final",
+      "label": "FINAL ASSEMBLY",
+      "bbox": [
+        770,
+        580,
+        400,
+        160
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "outbound",
+      "label": "OUTBOUND",
+      "bbox": [
+        1200,
+        600,
+        110,
+        140
+      ],
+      "color": "#d9ebfb"
+    }
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "STRUCTURE",
+      "color": "#087fce",
+      "source": "inbound",
+      "destinations": [
+        "cell_a"
+      ],
+      "speed": 52,
+      "routes": [
+        {
+          "id": "blue-cell-a",
+          "destination": "cell_a",
+          "waypoints": [
+            [
+              340,
+              130
+            ],
+            [
+              450,
+              130
+            ],
+            [
+              450,
+              180
+            ],
+            [
+              500,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green",
+      "label": "BATTERY",
+      "color": "#10a56a",
+      "source": "inbound",
+      "destinations": [
+        "battery"
+      ],
+      "speed": 38,
+      "routes": [
+        {
+          "id": "green-battery",
+          "destination": "battery",
+          "waypoints": [
+            [
+              250,
+              180
+            ],
+            [
+              250,
+              210
+            ],
+            [
+              450,
+              210
+            ],
+            [
+              450,
+              290
+            ],
+            [
+              1040,
+              290
+            ],
+            [
+              1040,
+              245
+            ],
+            [
+              1080,
+              245
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "purple",
+      "label": "INSPECTION LOOP",
+      "color": "#d83faf",
+      "source": "high_bay",
+      "destinations": [
+        "inspection"
+      ],
+      "speed": 64,
+      "routes": [
+        {
+          "id": "purple-inspection",
+          "destination": "inspection",
+          "waypoints": [
+            [
+              410,
+              370
+            ],
+            [
+              460,
+              370
+            ],
+            [
+              460,
+              530
+            ],
+            [
+              875,
+              530
+            ],
+            [
+              875,
+              460
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "orange",
+      "label": "SERVICE PARTS",
+      "color": "#ee7a22",
+      "source": "maintenance",
+      "destinations": [
+        "final"
+      ],
+      "speed": 46,
+      "routes": [
+        {
+          "id": "orange-final",
+          "destination": "final",
+          "waypoints": [
+            [
+              530,
+              680
+            ],
+            [
+              650,
+              680
+            ],
+            [
+              650,
+              550
+            ],
+            [
+              740,
+              550
+            ],
+            [
+              740,
+              660
+            ],
+            [
+              770,
+              660
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "evidence": [
+    {
+      "field": "flows.blue.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.green.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.purple.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.orange.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    }
+  ]
+}

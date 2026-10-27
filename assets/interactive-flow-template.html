@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plant Material Flow</title>
+<style>
+:root{--shell:#101d27;--panel:#142733;--rule:#395767;--ink:#f3f7f8;--muted:#9cafb8;--accent:#ffd400;--blue:#1687e8;--paper:#f7f8f6}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--shell);color:var(--ink);font:14px/1.4 Arial,sans-serif}
+header{height:56px;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid var(--rule)}h1{margin:0;border-left:4px solid var(--accent);padding-left:13px;font-size:19px;letter-spacing:.06em;text-transform:uppercase}
+main{display:grid;grid-template-columns:minmax(0,1fr) 270px;min-height:calc(100vh - 56px)}.stage{padding:12px;min-width:0}.map{height:calc(100vh - 80px);min-height:520px;background:var(--paper);border:1px solid #6e8795;overflow:auto}.map svg{display:block;width:100%;height:100%;min-width:850px}
+aside{padding:16px;border-left:1px solid var(--rule);background:#0e1b24}aside section+section{margin-top:18px}h2{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#bdced6;border-bottom:1px solid var(--rule);padding-bottom:7px}
+button,input{font:inherit}.filter,.action{width:100%;margin:0 0 7px;padding:9px;border:1px solid #466577;border-radius:3px;background:#112532;color:#fff;text-align:left;cursor:pointer}.filter[aria-pressed=true],.action.primary{border-color:var(--accent);box-shadow:inset 3px 0 var(--accent)}
+.speed{display:grid;grid-template-columns:1fr 72px;gap:8px;align-items:center}.speed input{width:100%;padding:7px;border:1px solid #466577;background:#142a37;color:#fff}.zone{stroke:#56717e;stroke-width:1.2}.map-label{font-weight:700;fill:#263b46;text-anchor:middle}.flow{transition:opacity .2s}.flow.off{opacity:.035}.route-casing{fill:none;stroke:#fff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.flow-path{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.flow-dot{stroke:#fff;stroke-width:1.2}.labels.off{opacity:0}
+@media(max-width:900px){main{grid-template-columns:1fr}.map{height:62vh}.map svg{width:auto}aside{border-left:0;border-top:1px solid var(--rule)}}@media(prefers-reduced-motion:reduce){.flow-dot{display:none}}
+</style>
+</head>
+<body>
+<header><h1>Plant Material Flow</h1></header>
+<main>
+<section class="stage"><div class="map">
+<svg id="flow-map" viewBox="0 0 1000 600" role="img" aria-label="Plant layout and material flows">
+  <!-- Replace this sample geometry from the manifest. -->
+  <rect width="1000" height="600" fill="#eef2f1"/>
+  <rect class="zone" data-zone-id="receiving" x="80" y="100" width="220" height="150" fill="#dcecff"/>
+  <rect class="zone" data-zone-id="assembly" x="650" y="330" width="260" height="170" fill="#dff4e8"/>
+  <g class="labels"><text class="map-label" x="190" y="180">RECEIVING</text><text class="map-label" x="780" y="420">ASSEMBLY</text></g>
+  <g class="flow" data-layer="blue">
+    <path class="flow-path" data-route-id="blue-main" data-source="receiving" data-destination="assembly" data-waypoints="300,175;430,175;430,415;650,415" d="M300 175H430V415H650" stroke="#1687e8"/>
+  </g>
+</svg>
+</div></section>
+<aside>
+  <section><h2>Flow display</h2><button class="filter" data-flow="all" aria-pressed="true">All flows</button><button class="filter" data-flow="blue" aria-pressed="false">Product A</button></section>
+  <section><h2>Flow speed</h2><div class="speed"><label for="blue-speed">Product A</label><input id="blue-speed" data-speed-layer="blue" type="number" min="5" max="300" value="55"></div></section>
+  <section><h2>Controls</h2><button class="action primary" id="play">Pause</button><button class="action" id="labels">Labels: on</button><button class="action" id="reset">Reset</button></section>
+</aside>
+</main>
+<script>
+const defaultSpeeds={blue:55},speeds={...defaultSpeeds},layers=[...document.querySelectorAll('.flow')],movers=[];
+let active=new Set(layers.map(layer=>layer.dataset.layer)),running=true,elapsed=0,labelsOn=true;
+layers.forEach(group=>group.querySelectorAll('.flow-path').forEach((path,pathIndex)=>{
+  const casing=path.cloneNode(false);casing.setAttribute('class','route-casing');group.insertBefore(casing,path);
+  const length=path.getTotalLength(),count=length>260?3:2;
+  for(let i=0;i<count;i++){const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('r','3.8');dot.setAttribute('fill',path.getAttribute('stroke'));dot.setAttribute('class','flow-dot');group.appendChild(dot);movers.push({path,dot,length,layer:group.dataset.layer,offset:i/count+pathIndex*.09})}
+}));
+function render(){layers.forEach(layer=>layer.classList.toggle('off',!active.has(layer.dataset.layer)));document.querySelectorAll('[data-flow]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.flow==='all'?active.size===layers.length:active.size===1&&active.has(button.dataset.flow))))}
+document.querySelectorAll('[data-flow]').forEach(button=>button.onclick=()=>{active=new Set(button.dataset.flow==='all'?layers.map(layer=>layer.dataset.layer):[button.dataset.flow]);render()});
+document.querySelectorAll('[data-speed-layer]').forEach(input=>{input.oninput=()=>{const value=Number(input.value);if(Number.isFinite(value)&&value>0)speeds[input.dataset.speedLayer]=Math.min(300,Math.max(5,value))}});
+document.getElementById('play').onclick=event=>{running=!running;event.currentTarget.textContent=running?'Pause':'Play'};
+document.getElementById('labels').onclick=event=>{labelsOn=!labelsOn;document.querySelector('.labels').classList.toggle('off',!labelsOn);event.currentTarget.textContent=labelsOn?'Labels: on':'Labels: off'};
+document.getElementById('reset').onclick=()=>{active=new Set(layers.map(layer=>layer.dataset.layer));running=true;labelsOn=true;elapsed=0;Object.entries(defaultSpeeds).forEach(([id,value])=>{speeds[id]=value;document.querySelector(`[data-speed-layer="${id}"]`).value=value});document.querySelector('.labels').classList.remove('off');document.getElementById('play').textContent='Pause';document.getElementById('labels').textContent='Labels: on';render()};
+let last=performance.now();function animate(now){const delta=Math.min((now-last)/1000,.05);last=now;if(running)elapsed+=delta;movers.forEach(mover=>{const progress=(elapsed*speeds[mover.layer]/mover.length+mover.offset)%1,point=mover.path.getPointAtLength(progress*mover.length);mover.dot.setAttribute('cx',point.x);mover.dot.setAttribute('cy',point.y)});requestAnimationFrame(animate)}
+render();requestAnimationFrame(animate);
+</script>
+</body>
+</html>

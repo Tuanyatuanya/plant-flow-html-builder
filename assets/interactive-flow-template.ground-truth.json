@@ -1,0 +1,22 @@
+{
+  "case_id": "template-example",
+  "title": "Plant Material Flow",
+  "canvas": {"width": 1000, "height": 600},
+  "zones": [
+    {"id": "receiving", "label": "RECEIVING", "bbox": [80, 100, 220, 150], "color": "#dcecff"},
+    {"id": "assembly", "label": "ASSEMBLY", "bbox": [650, 330, 260, 170], "color": "#dff4e8"}
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "Product A",
+      "color": "#1687e8",
+      "source": "receiving",
+      "destinations": ["assembly"],
+      "speed": 55,
+      "routes": [
+        {"id": "blue-main", "destination": "assembly", "waypoints": [[300, 175], [430, 175], [430, 415], [650, 415]]}
+      ]
+    }
+  ]
+}

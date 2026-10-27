@@ -1,0 +1,164 @@
+{
+  "case_id": "test-01-linear-line",
+  "title": "TEST 01 · LINEAR ASSEMBLY",
+  "difficulty": "easy",
+  "zones": [
+    {
+      "id": "receiving",
+      "label": "RECEIVING",
+      "bbox": [
+        100,
+        130,
+        250,
+        160
+      ],
+      "color": "#d9ebfb"
+    },
+    {
+      "id": "supermarket",
+      "label": "SUPERMARKET",
+      "bbox": [
+        450,
+        130,
+        260,
+        160
+      ],
+      "color": "#fff1bf"
+    },
+    {
+      "id": "assembly",
+      "label": "MAIN ASSEMBLY",
+      "bbox": [
+        450,
+        450,
+        420,
+        220
+      ],
+      "color": "#ddf3e6"
+    },
+    {
+      "id": "quality",
+      "label": "QUALITY GATE",
+      "bbox": [
+        970,
+        450,
+        240,
+        100
+      ],
+      "color": "#f6dced"
+    },
+    {
+      "id": "shipping",
+      "label": "SHIPPING",
+      "bbox": [
+        970,
+        650,
+        240,
+        130
+      ],
+      "color": "#d8f1f2"
+    }
+  ],
+  "flows": [
+    {
+      "id": "blue",
+      "label": "PRODUCT A",
+      "color": "#087fce",
+      "source": "receiving",
+      "destinations": [
+        "shipping"
+      ],
+      "speed": 55,
+      "routes": [
+        {
+          "id": "blue-main",
+          "destination": "shipping",
+          "waypoints": [
+            [
+              350,
+              210
+            ],
+            [
+              400,
+              210
+            ],
+            [
+              400,
+              410
+            ],
+            [
+              900,
+              410
+            ],
+            [
+              900,
+              715
+            ],
+            [
+              970,
+              715
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "green",
+      "label": "EMPTY CONTAINER RETURN",
+      "color": "#10a56a",
+      "source": "shipping",
+      "destinations": [
+        "receiving"
+      ],
+      "speed": 35,
+      "routes": [
+        {
+          "id": "green-return",
+          "destination": "receiving",
+          "waypoints": [
+            [
+              970,
+              755
+            ],
+            [
+              920,
+              755
+            ],
+            [
+              920,
+              820
+            ],
+            [
+              80,
+              820
+            ],
+            [
+              80,
+              250
+            ],
+            [
+              100,
+              250
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 1600,
+    "height": 900
+  },
+  "evidence": [
+    {
+      "field": "flows.blue.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    },
+    {
+      "field": "flows.green.direction",
+      "basis": "arrowhead",
+      "confidence": 1.0
+    }
+  ]
+}
